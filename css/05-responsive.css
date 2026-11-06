@@ -14,11 +14,30 @@
   .editorial-columns,
   .bento-grid,
   .sketch-layout,
+  .model-viewer-layout,
   .timeline-item,
   .modules-showcase,
   .transparency-grid,
   .footer-grid {
     grid-template-columns: 1fr;
+  }
+
+  .model-viewer-sticky {
+    min-height: 0;
+    padding-block: 5rem 1.5rem;
+  }
+
+  .model-viewer-layout {
+    gap: 1.5rem;
+  }
+
+  .model-viewer-desc {
+    margin-bottom: 1rem;
+  }
+
+  .model-stage {
+    height: min(42svh, 28rem);
+    min-height: 16rem;
   }
 
   .bento-span-2 {

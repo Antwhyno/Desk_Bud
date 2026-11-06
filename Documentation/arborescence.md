@@ -2,7 +2,9 @@
 
 projet-deskbud/
 ├── index.html                  # Squelette sémantique unique
-├── assets/                     # Icônes, schémas, captures
+├── assets/
+    ├── model 3D desk_bud.glb
+    ├── model 3D desk_bud.gltf                 # Icônes, schémas, captures
 ├── css/
 │   ├── style.css               # Fichier d'assemblage (@import)
 │   ├── 01-variables.css        # Tokens, palettes de couleurs (Flavours), polices

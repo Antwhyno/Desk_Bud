@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Desk Bud — Projet NSI · Compagnon Robotique de Bureau</title>
   <meta name="description" content="Présentation du projet de spécialité NSI : Desk Bud, un compagnon robotique interactif open-source conçu de la modélisation 3D au code embarqué.">
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
+      }
+    }
+  </script>
   <!-- Polices Google Fonts : Instrument Serif (Éditorial), Plus Jakarta Sans (UI), JetBrains Mono (Technique) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -379,6 +387,40 @@
             </div>
           </div>
 
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         PROTOTYPE 3D · ANIMATION AU DEFILEMENT
+         ========================================================= -->
+    <section id="modele-3d" class="model-viewer-section" data-flavour-section="warm" data-status="Prototype 3D · Rotation">
+      <div class="model-viewer-sticky">
+        <div class="container model-viewer-layout">
+          <div class="model-viewer-info">
+            <span class="chapter-index">Prototype 3D · Vue à 360°</span>
+            <h2 class="chapter-title">Le Desk Bud, sous tous ses angles.</h2>
+            <p class="model-viewer-desc">
+              Faites défiler pour découvrir le modèle 3D. Un tour complet révèle chaque détail du prototype avant de poursuivre le récit.
+            </p>
+            <div class="model-viewer-progress" aria-live="polite">
+              <span>ROTATION DU MODÈLE</span>
+              <strong id="modelRotationValue">000°</strong>
+            </div>
+          </div>
+
+          <div class="model-stage">
+            <canvas
+              id="modelCanvas"
+              class="model-canvas"
+              aria-label="Modèle 3D du Desk Bud, animé par le défilement"
+              role="img"
+            ></canvas>
+            <div class="model-stage-caption">
+              <span>DESK BUD · V1</span>
+              <span id="modelStatus" role="status">Chargement du modèle 3D…</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
