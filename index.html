@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="fr" data-flavour="paper">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Desk Bud — Projet NSI · Compagnon Robotique de Bureau</title>
+  <meta name="description" content="Présentation du projet de spécialité NSI : Desk Bud, un compagnon robotique interactif open-source conçu de la modélisation 3D au code embarqué.">
+  <!-- Polices Google Fonts : Instrument Serif (Éditorial), Plus Jakarta Sans (UI), JetBrains Mono (Technique) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Filtre SVG pour l'effet Sketch / Blueprint (extraction des contours) -->
+  <svg class="svg-filters" aria-hidden="true">
+    <defs>
+      <filter id="sketch-filter">
+        <feColorMatrix type="saturate" values="0" result="gray" />
+        <feConvolveMatrix in="gray" order="3" kernelMatrix="-1 -1 -1 -1 8 -1 -1 -1 -1" preserveAlpha="true" result="edges" />
+        <feComponentTransfer in="edges" result="inverted">
+          <feFuncR type="table" tableValues="1 0" />
+          <feFuncG type="table" tableValues="1 0" />
+          <feFuncB type="table" tableValues="1 0" />
+        </feComponentTransfer>
+        <feMorphology in="inverted" operator="erode" radius="0.6" result="thick-lines" />
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- Fil conducteur central qui se remplit au scroll -->
+  <div class="center-stream" aria-hidden="true">
+    <div class="center-stream-fill" id="streamFill"></div>
+  </div>
+
+  <!-- Barre de navigation supérieure (Organisation inspirée des Maths au Sommet) -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="#hero" class="brand">
+        <span class="brand-dot"></span>
+        <span class="brand-title">Desk Bud · NSI</span>
+      </a>
+
+      <!-- Télémétrie d'ascension / progression en direct -->
+      <div class="telemetry-pill" aria-live="polite">
+        <span class="telemetry-value" id="telemetryValue">000 MHz</span>
+        <span class="telemetry-divider">·</span>
+        <span class="telemetry-status" id="telemetryStatus">Initialisation…</span>
+      </div>
+
+      <nav class="site-nav" aria-label="Navigation principale">
+        <button class="nav-toggle" id="sommaireBtn" aria-expanded="false" aria-controls="sommaireMenu">
+          Sommaire
+        </button>
+        <ul class="nav-links" id="sommaireMenu">
+          <li><a href="#projet">01 · Le projet</a></li>
+          <li><a href="#architecture">02 · Le Desk Bud</a></li>
+          <li><a href="#annee">03 · L'année</a></li>
+          <li><a href="#galerie">04 · Modules</a></li>
+          <li><a href="#soutenir" class="nav-cta">Code & Dossier</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- =========================================================
+         HERO SECTION (Palette : Paper / Blueprint)
+         ========================================================= -->
+    <section id="hero" class="section hero-section" data-flavour-section="paper" data-status="Bootloader Actif">
+      <!-- Les 4 objets du bureau à 7h du matin (Règle "One Room") -->
+      <div class="desk-objects" aria-hidden="true">
+        <div class="desk-obj obj-coffee" data-speed="0.18">
+          <span class="obj-tag">07:00 · Caféine</span>
+          <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="40" cy="40" r="28" stroke-dasharray="3 3"/>
+            <circle cx="40" cy="40" r="20"/>
+            <path d="M60 36h8a4 4 0 0 1 0 8h-8"/>
+          </svg>
+        </div>
+        <div class="desk-obj obj-square" data-speed="0.32">
+          <span class="obj-tag">CAO · Échelle 1:1</span>
+          <svg viewBox="0 0 90 90" fill="none" stroke="currentColor" stroke-width="1.8">
+            <polygon points="10,80 80,80 10,10"/>
+            <polygon points="24,68 54,68 24,38"/>
+          </svg>
+        </div>
+        <div class="desk-obj obj-chip" data-speed="0.25">
+          <span class="obj-tag">MCU · ESP32-S3</span>
+          <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.8">
+            <rect x="22" y="22" width="36" height="36" rx="4"/>
+            <path d="M12 30h10M12 40h10M12 50h10M58 30h10M58 40h10M58 50h10M30 12v10M40 12v10M50 12v10M30 58v10M40 58v10M50 58v10"/>
+          </svg>
+        </div>
+        <div class="desk-obj obj-pen" data-speed="0.42">
+          <span class="obj-tag">Cotes · ±0.1 mm</span>
+          <svg viewBox="0 0 100 30" fill="none" stroke="currentColor" stroke-width="1.8">
+            <rect x="20" y="9" width="65" height="12" rx="2"/>
+            <polygon points="8,15 20,9 20,21"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="container hero-grid">
+        <div class="hero-editorial">
+          <p class="eyebrow">Un bureau. Un robot. Une année de NSI.</p>
+          <h1 class="hero-title">
+            Le Desk Bud<br>
+            <em>au sommet du code.</em>
+          </h1>
+          <p class="hero-lead">
+            Concevoir un compagnon robotique de bureau open-source pour retrouver la concentration, maîtriser l'algorithmique embarquée et relier le code Python au monde physique.
+          </p>
+
+          <!-- Métadonnées structurées comme sur Les Maths au Sommet -->
+          <dl class="meta-strip">
+            <div class="meta-item">
+              <dt>Spécialité</dt>
+              <dd>Terminale NSI</dd>
+            </div>
+            <div class="meta-item">
+              <dt>Ville</dt>
+              <dd>Dijon</dd>
+            </div>
+            <div class="meta-item">
+              <dt>Promo</dt>
+              <dd>2025–2026</dd>
+            </div>
+            <div class="meta-item">
+              <dt>Cœur</dt>
+              <dd>Python &amp; ESP32</dd>
+            </div>
+          </dl>
+
+          <div class="hero-actions">
+            <a href="#projet" class="btn btn-primary">Commencer le récit ↓</a>
+            <a href="#architecture" class="btn btn-ghost">Voir la coupe technique</a>
+          </div>
+        </div>
+
+        <!-- Aperçu interactif du Desk Bud en temps réel -->
+        <div class="hero-preview">
+          <div class="preview-card">
+            <div class="preview-topbar">
+              <span class="mono-tag">UNITÉ #01 · DESK-BUD-REV2</span>
+              <span class="status-dot">ONLINE</span>
+            </div>
+            <div class="deskbud-stage" id="heroBudStage">
+              <div class="deskbud-chassis">
+                <div class="deskbud-ears">
+                  <span></span><span></span>
+                </div>
+                <div class="deskbud-screen" id="interactiveFace">
+                  <div class="oled-eyes">
+                    <span class="eye left-eye"></span>
+                    <span class="eye right-eye"></span>
+                  </div>
+                  <div class="oled-mouth" id="oledMouth"></div>
+                  <div class="oled-subtext" id="oledSubtext">POMODORO · 25:00</div>
+                </div>
+                <div class="deskbud-controls">
+                  <button type="button" class="tactile-btn active" data-face="focus">Focus</button>
+                  <button type="button" class="tactile-btn" data-face="happy">Pause</button>
+                  <button type="button" class="tactile-btn" data-face="code">Debug</button>
+                </div>
+              </div>
+            </div>
+            <div class="preview-caption">
+              <span>Écran OLED 128×64 px · I2C 400 kHz</span>
+              <span>Cliquez sur un mode pour tester l'état</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bandeau défilant (Ticker calibré en px/s) -->
+    <div class="ticker-wrap" aria-hidden="true">
+      <div class="ticker-track" id="tickerTrack">
+        <span>PROJET TERMINALE NSI · ARCHITECTURE MATÉRIELLE &amp; LOGICIELLE · MODÉLISATION 3D SANS SUPPORT · PYTHON &amp; MICROPYTHON · PROTOCOLE I2C / WEBSOCKET · ZÉRO DISTRACTION · </span>
+        <span>PROJET TERMINALE NSI · ARCHITECTURE MATÉRIELLE &amp; LOGICIELLE · MODÉLISATION 3D SANS SUPPORT · PYTHON &amp; MICROPYTHON · PROTOCOLE I2C / WEBSOCKET · ZÉRO DISTRACTION · </span>
+      </div>
+    </div>
+
+    <!-- =========================================================
+         CHAPITRE 01 · LE PROJET (Palette : Warm Stone)
+         ========================================================= -->
+    <section id="projet" class="section" data-flavour-section="warm" data-status="Chapitre 01 · Genèse">
+      <div class="container">
+        <div class="chapter-header reveal">
+          <span class="chapter-index">Chapitre 01 · Le projet</span>
+          <h2 class="chapter-title">Pourquoi construire un compagnon de bureau en NSI ?</h2>
+        </div>
+
+        <div class="editorial-columns reveal">
+          <p class="editorial-p">
+            Le projet est né d'un constat partagé par notre groupe dès la rentrée de Terminale. Entre la préparation du Bac, les projets de spécialité et Parcoursup, nos sessions de révision sont constamment fragmentées par les notifications du smartphone posé à côté du clavier.
+          </p>
+          <p class="editorial-p">
+            Plutôt que d'ajouter une énième application mobile, nous avons décidé d'appliquer le programme de <strong>Numérique et Sciences Informatiques (NSI)</strong> à un objet tangible : un petit robot compagnon posé sous l'écran, capable de gérer nos cycles de travail, d'afficher la télémétrie de nos scripts Python et de réagir à l'environnement sonore sans jamais capter notre attention inutilement.
+          </p>
+        </div>
+
+        <!-- Bento Grid Asymétrique (Règle anti-générique Taste Design) -->
+        <div class="bento-grid">
+          <article class="bento-card bento-span-2 reveal">
+            <div class="card-meta">01 / ARCHITECTURE SYSTÈME EMBARQUÉ</div>
+            <h3>Un pont concret entre structures de données et électronique</h3>
+            <p>
+              Le Desk Bud met en œuvre une file de priorité (FIFO) pour ordonnancer les événements (alertes Pomodoro, requêtes API météo, capteurs) et un automate fini à 6 états pour piloter ses expressions faciales et ses servomoteurs sans bloquer la boucle principale.
+            </p>
+            <div class="data-line">
+              <span><strong>240 MHz</strong> Dual-Core Xtensa</span>
+              <span><strong>520 Ko</strong> SRAM</span>
+              <span><strong>0,38 ms</strong> Temps de cycle</span>
+            </div>
+          </article>
+
+          <article class="bento-card reveal">
+            <div class="card-meta">02 / FABRICATION ADDITIVE</div>
+            <h3>Châssis imprimé en 3D sans support</h3>
+            <p>
+              Conçu en CAO paramétrique avec des chanfreins à 45°, des inserts filetés en laiton posés à chaud et une base lestée antidérapante.
+            </p>
+            <div class="data-line">
+              <span><strong>115 g</strong> PLA Mat</span>
+              <span><strong>2h15</strong> Impression</span>
+            </div>
+          </article>
+
+          <article class="bento-card reveal">
+            <div class="card-meta">03 / RÉSEAU &amp; API</div>
+            <h3>Synchronisation locale WebSocket</h3>
+            <p>
+              Un serveur Python léger tourne sur l'ordinateur et communique en JSON sur le réseau local avec le Desk Bud lorsqu'un test unitaire échoue ou réussit.
+            </p>
+            <div class="data-line">
+              <span><strong>WS://</strong> Port 8765</span>
+              <span><strong>12 octets</strong> Trame JSON</span>
+            </div>
+          </article>
+
+          <article class="bento-card bento-span-2 reveal">
+            <div class="card-meta">04 / PROGRAMME OFFICIEL NSI</div>
+            <h3>Quatre piliers du programme mobilisés dans un seul objet</h3>
+            <p>
+              Structures de données (graphes d'états et files d'événements), Architectures matérielles et systèmes d'exploitation (bus I2C, interruptions GPIO), Réseaux (sockets TCP/IP) et Algorithmique avancée (lissage exponentiel des capteurs).
+            </p>
+            <div class="data-line">
+              <span><strong>Python 3.12</strong> Back-end</span>
+              <span><strong>MicroPython</strong> Firmware</span>
+              <span><strong>100 %</strong> Open-Hardware</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         CHAPITRE 02 · DU BLUEPRINTS AU RENDU (Sketch-to-Render Sticky)
+         Palette : Obsidian / Dark Technical
+         ========================================================= -->
+    <section id="architecture" class="sketch-scroll-section" data-flavour-section="obsidian" data-status="Chapitre 02 · Coupe CAO">
+      <div class="sketch-sticky-wrapper">
+        <div class="container sketch-layout">
+          
+          <div class="sketch-info">
+            <span class="chapter-index">Chapitre 02 · Du dessin à la matière</span>
+            <h2 class="chapter-title">De l'esquisse CAO à l'assemblage final.</h2>
+            <p class="sketch-desc">
+              Faites défiler pour balayer le plan d'ingénierie vers le prototype assemblé. Les 20 premiers pourcents maintiennent le schéma technique avant de révéler l'objet réel.
+            </p>
+
+            <ul class="spec-list">
+              <li>
+                <span class="spec-code">A1</span>
+                <div>
+                  <strong>Dalle OLED SSD1306 (128×64)</strong>
+                  <p>Affichage matriciel piloté en I2C à 60 images par seconde.</p>
+                </div>
+              </li>
+              <li>
+                <span class="spec-code">B2</span>
+                <div>
+                  <strong>Servomoteur MG90S Pignons Métal</strong>
+                  <p>Inclinaison expressive de la tête de -25° à +35° en PWM.</p>
+                </div>
+              </li>
+              <li>
+                <span class="spec-code">C3</span>
+                <div>
+                  <strong>Capteur Tactile Capacitif TTP223</strong>
+                  <p>Logé sous le sommet du crâne pour lancer ou acquitter un cycle.</p>
+                </div>
+              </li>
+            </ul>
+
+            <div class="wipe-meter">
+              <span>PROGRESSION DU RENDU</span>
+              <strong id="wipePercent">00% · ESQUISSE CAO</strong>
+            </div>
+          </div>
+
+          <!-- Zone de superposition Sketch / Render avec ligne de coupe de 2px -->
+          <div class="sketch-viewport" id="sketchViewport">
+            <!-- Couche 1 : Le Sketch / Blueprint (avec filtre SVG et traits techniques) -->
+            <div class="layer layer-sketch">
+              <div class="blueprint-grid-bg"></div>
+              <svg class="bud-illustration" viewBox="0 0 500 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Lignes de cotes techniques -->
+                <g stroke="#64748B" stroke-width="1" stroke-dasharray="4 4">
+                  <line x1="90" y1="50" x2="410" y2="50" />
+                  <line x1="90" y1="360" x2="410" y2="360" />
+                  <line x1="65" y1="80" x2="65" y2="330" />
+                </g>
+                <text x="225" y="42" fill="#94A3B8" font-family="JetBrains Mono" font-size="11">L = 94.0 mm</text>
+                <text x="15" y="210" fill="#94A3B8" font-family="JetBrains Mono" font-size="11">H = 112 mm</text>
+
+                <!-- Corps Esquisse filaire -->
+                <rect x="115" y="80" width="270" height="200" rx="34" stroke="#E2E8F0" stroke-width="2.5"/>
+                <rect x="145" y="108" width="210" height="125" rx="16" stroke="#94A3B8" stroke-width="2"/>
+                <!-- Yeux esquisse -->
+                <circle cx="205" cy="162" r="20" stroke="#E2E8F0" stroke-width="2" stroke-dasharray="5 3"/>
+                <circle cx="295" cy="162" r="20" stroke="#E2E8F0" stroke-width="2" stroke-dasharray="5 3"/>
+                <path d="M230 198 Q250 212 270 198" stroke="#E2E8F0" stroke-width="2"/>
+                <!-- Socle articulé esquisse -->
+                <path d="M195 280 L175 335 L325 335 L305 280 Z" stroke="#E2E8F0" stroke-width="2"/>
+                <rect x="150" y="335" width="200" height="22" rx="8" stroke="#E2E8F0" stroke-width="2.5"/>
+                <!-- Annotations fléchées -->
+                <line x1="355" y1="140" x2="425" y2="115" stroke="#FF4F00" stroke-width="1.5"/>
+                <text x="430" y="118" fill="#FF4F00" font-family="JetBrains Mono" font-size="11">SSD1306</text>
+                <line x1="315" y1="308" x2="420" y2="308" stroke="#FF4F00" stroke-width="1.5"/>
+                <text x="425" y="312" fill="#FF4F00" font-family="JetBrains Mono" font-size="11">PWM MG90S</text>
+              </svg>
+            </div>
+
+            <!-- Couche 2 : Le Rendu Final Coloré (révélé par clip-path) -->
+            <div class="layer layer-render" id="renderLayer">
+              <svg class="bud-illustration" viewBox="0 0 500 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="bodyGrad" x1="115" y1="80" x2="385" y2="280" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#F4F4F6"/>
+                    <stop offset="100%" stop-color="#D4D6DD"/>
+                  </linearGradient>
+                  <linearGradient id="screenGrad" x1="145" y1="108" x2="355" y2="233" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#090A0F"/>
+                    <stop offset="100%" stop-color="#141720"/>
+                  </linearGradient>
+                </defs>
+                <!-- Ombre portée au sol -->
+                <ellipse cx="250" cy="364" rx="125" ry="14" fill="rgba(0,0,0,0.45)"/>
+                <!-- Oreilles / Antennes latérales Orange International -->
+                <rect x="96" y="145" width="19" height="64" rx="6" fill="#FF4F00"/>
+                <rect x="385" y="145" width="19" height="64" rx="6" fill="#FF4F00"/>
+                <!-- Châssis principal PLA Mat -->
+                <rect x="115" y="80" width="270" height="200" rx="34" fill="url(#bodyGrad)" stroke="#FFFFFF" stroke-width="2"/>
+                <!-- Écran OLED Noir Profond -->
+                <rect x="145" y="108" width="210" height="125" rx="16" fill="url(#screenGrad)" stroke="#272B36" stroke-width="3"/>
+                <!-- Yeux lumineux Cyan / Blanc -->
+                <rect x="185" y="144" width="38" height="36" rx="10" fill="#38BDF8"/>
+                <rect x="277" y="144" width="38" height="36" rx="10" fill="#38BDF8"/>
+                <circle cx="212" cy="154" r="5" fill="#FFFFFF"/>
+                <circle cx="304" cy="154" r="5" fill="#FFFFFF"/>
+                <!-- Sourire OLED -->
+                <path d="M232 196 Q250 212 268 196" stroke="#38BDF8" stroke-width="4" stroke-linecap="round"/>
+                <!-- Voyant d'état et gravure -->
+                <circle cx="165" cy="256" r="5" fill="#22C55E"/>
+                <text x="180" y="260" fill="#3F4454" font-family="JetBrains Mono" font-weight="600" font-size="11">DESK BUD // NSI-26</text>
+                <!-- Cou et Base lestée -->
+                <path d="M195 280 L175 335 L325 335 L305 280 Z" fill="#272A34"/>
+                <rect x="150" y="335" width="200" height="22" rx="8" fill="#181A20" stroke="#3F4454" stroke-width="1.5"/>
+              </svg>
+            </div>
+
+            <!-- Ligne rouge/orange de 2px sur le bord exact du balayage -->
+            <div class="wipe-laser-line" id="wipeLaserLine">
+              <span class="laser-badge">RENDER LIVE</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         CHAPITRE 03 · L'ANNÉE (Timeline inspirée des Maths au Sommet)
+         Palette : Paper / Blueprint
+         ========================================================= -->
+    <section id="annee" class="section" data-flavour-section="paper" data-status="Chapitre 03 · Chronologie">
+      <div class="container">
+        <div class="chapter-header reveal">
+          <span class="chapter-index">Chapitre 03 · L'année</span>
+          <h2 class="chapter-title">Neuf mois. Du premier croquis sur papier à l'oral du Bac.</h2>
+          <p class="chapter-sub">
+            La réalisation tisse en parallèle deux fils : concevoir le matériel et développer l'intelligence logicielle. Chaque mois, un jalon concret validé en laboratoire de NSI.
+          </p>
+        </div>
+
+        <ol class="timeline-list">
+          <li class="timeline-item reveal">
+            <div class="timeline-meta">
+              <span class="timeline-num">01</span>
+              <span class="timeline-date">Septembre 2025</span>
+            </div>
+            <div class="timeline-body">
+              <h3>Définition du cahier des charges &amp; Répartition</h3>
+              <p>Réunion de lancement du groupe de 3 élèves. Choix du microcontrôleur ESP32-S3, définition des contraintes d'impression 3D sans support et architecture logicielle modulaire.</p>
+              <span class="timeline-metric">Livrable : Schéma fonctionnel v1.0 · 3 rôles attribués</span>
+            </div>
+          </li>
+
+          <li class="timeline-item reveal">
+            <div class="timeline-meta">
+              <span class="timeline-num">02</span>
+              <span class="timeline-date">Novembre 2025</span>
+            </div>
+            <div class="timeline-body">
+              <h3>Modélisation CAO &amp; Premier prototype PLA</h3>
+              <p>Conception du boîtier articulé, intégration des tolérances de 0,2 mm pour l'écran OLED et pose des premiers inserts filetés en laiton au fer à souder.</p>
+              <span class="timeline-metric">Livrable : Châssis Rev.A · 115 g · Chanfreins 45°</span>
+            </div>
+          </li>
+
+          <li class="timeline-item reveal">
+            <div class="timeline-meta">
+              <span class="timeline-num">03</span>
+              <span class="timeline-date">Janvier 2026</span>
+            </div>
+            <div class="timeline-body">
+              <h3>Moteur d'expressions &amp; Automate à états finis</h3>
+              <p>Programmation en MicroPython de la machine à états gérant le clignement procédural des yeux, les courbes d'accélération du servomoteur et l'horloge Pomodoro.</p>
+              <span class="timeline-metric">Livrable : 60 FPS sur bus I2C · 8 émotions vectorielles</span>
+            </div>
+          </li>
+
+          <li class="timeline-item reveal">
+            <div class="timeline-meta">
+              <span class="timeline-num">04</span>
+              <span class="timeline-date">Mars 2026</span>
+            </div>
+            <div class="timeline-body">
+              <h3>Pont WebSocket PC ↔ Desk Bud</h3>
+              <p>Création du script Python compagnon sur ordinateur permettant d'envoyer l'état du CPU, la météo de Dijon et le résultat d'exécution de nos programmes au robot.</p>
+              <span class="timeline-metric">Livrable : API locale temps réel · Latence &lt; 15 ms</span>
+            </div>
+          </li>
+
+          <li class="timeline-item reveal">
+            <div class="timeline-meta">
+              <span class="timeline-num">05</span>
+              <span class="timeline-date">Juin 2026</span>
+            </div>
+            <div class="timeline-body">
+              <h3>Soutenance finale &amp; Publication Open-Source</h3>
+              <p>Présentation du démonstrateur fonctionnel devant le jury et mise en ligne des fichiers STL, du code source commenté et de la documentation d'assemblage.</p>
+              <span class="timeline-metric">Livrable : Dépôt GitHub complet · Licence MIT</span>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         CHAPITRE 04 · MODULES & LOGICIEL (Palette : Forest / Sage)
+         ========================================================= -->
+    <section id="galerie" class="section" data-flavour-section="forest" data-status="Chapitre 04 · Logiciel">
+      <div class="container">
+        <div class="chapter-header reveal">
+          <span class="chapter-index">Chapitre 04 · Intelligence &amp; Modules</span>
+          <h2 class="chapter-title">Un code lisible, pensé comme un système industriel.</h2>
+        </div>
+
+        <div class="modules-showcase">
+          <div class="module-cards">
+            <article class="module-card reveal">
+              <span class="module-num">MODULE 01</span>
+              <h3>Gestionnaire Pomodoro &amp; Fatigue</h3>
+              <p>Cycles de 25 minutes de travail profond suivis de 5 minutes de pause, avec rappel postural par mouvement doux de la tête.</p>
+              <code>state.transition("FOCUS", duration=1500)</code>
+            </article>
+
+            <article class="module-card reveal">
+              <span class="module-num">MODULE 02</span>
+              <h3>Sentinelle de Code (IDE Watcher)</h3>
+              <p>Surveille le terminal de l'élève : le Desk Bud sourit quand les tests passent et affiche la ligne d'erreur en cas d'exception Python.</p>
+              <code>ws.send(json.dumps({"status": "PASS"}))</code>
+            </article>
+
+            <article class="module-card reveal">
+              <span class="module-num">MODULE 03</span>
+              <h3>Ambiance &amp; Décibels</h3>
+              <p>Échantillonne le niveau sonore ambiant sans jamais enregistrer la voix, pour alerter lorsque le bruit dépasse le seuil de concentration.</p>
+              <code>db_smooth = 0.85 * prev + 0.15 * raw</code>
+            </article>
+          </div>
+
+          <div class="code-window reveal">
+            <div class="code-header">
+              <span>firmware/state_machine.py</span>
+              <span>MicroPython v1.23</span>
+            </div>
+            <pre><code><span class="kw">class</span> <span class="cls">DeskBudFSM</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(self, oled, servo):
+        self.oled = oled
+        self.servo = servo
+        self.state = <span class="str">"IDLE"</span>
+        self.queue = []  <span class="cm"># File FIFO d'événements</span>
+
+    <span class="kw">def</span> <span class="fn">enqueue</span>(self, event, priority=<span class="num">1</span>):
+        self.queue.append((priority, event))
+        self.queue.sort(key=<span class="kw">lambda</span> x: x[<span class="num">0</span>])
+
+    <span class="kw">def</span> <span class="fn">tick</span>(self, dt):
+        <span class="kw">if</span> self.queue:
+            _, next_evt = self.queue.pop(<span class="num">0</span>)
+            self.transition(next_evt)
+        self.oled.render_frame(self.state, dt)</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         SECTION TRANSPARENCE / RESSOURCES (Inspirée des Maths au Sommet)
+         ========================================================= -->
+    <section id="soutenir" class="section support-section" data-flavour-section="obsidian" data-status="100% · Prêt pour l'oral">
+      <div class="container">
+        <div class="support-cta-banner reveal">
+          <h2>Explorer le projet ou reproduire le Desk Bud.</h2>
+          <p>Tous nos plans 3D, schémas de câblage et scripts Python sont accessibles librement pour les élèves et enseignants de NSI.</p>
+          <div class="hero-actions">
+            <a href="https://github.com/" target="_blank" rel="noopener" class="btn btn-primary">Explorer le dépôt GitHub →</a>
+            <a href="mailto:contact@projet-deskbud-nsi.fr" class="btn btn-ghost">✉ Contacter l'équipe</a>
+          </div>
+        </div>
+
+        <div class="transparency-grid reveal">
+          <div class="transparency-block">
+            <h3>Transparence &amp; Open-Hardware</h3>
+            <p>
+              Le coût total de revient d'un Desk Bud est inférieur à <strong>18,50 €</strong> (ESP32-S3, écran OLED 0,96", micro-servomoteur MG90S, capteur TTP223 et 115 g de filament PLA). Aucune dépendance cloud payante n'est requise : tout fonctionne en local.
+            </p>
+          </div>
+          <div class="transparency-block">
+            <h3>Documentation pédagogique NSI</h3>
+            <p>
+              Votre lycée ou votre club robotique souhaite fabriquer sa propre flotte de Desk Buds ? Contactez notre équipe pour récupérer le guide de montage pas à pas, les exercices d'algorithmique associés et les profils d'impression 3D.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Pied de page structuré exactement comme Les Maths au Sommet -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <strong>Desk Bud — Projet NSI</strong>
+        <p class="footer-promo">Promotion 2025–2026</p>
+        <p class="footer-desc">
+          Projet pédagogique de spécialité Numérique et Sciences Informatiques (Terminale). Conception matérielle, impression 3D et développement Python embarqué à Dijon.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Aller à</h4>
+        <ul>
+          <li><a href="#projet">Le projet</a></li>
+          <li><a href="#architecture">Coupe CAO</a></li>
+          <li><a href="#annee">L'année</a></li>
+          <li><a href="#galerie">Modules &amp; Code</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:contact@projet-deskbud-nsi.fr">Écrire à l'équipe</a></li>
+          <li>Spécialité NSI · Terminale</li>
+          <li>Dijon, France</li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Ressources</h4>
+        <ul>
+          <li><a href="https://github.com/" target="_blank" rel="noopener">Dépôt GitHub →</a></li>
+          <li><a href="#architecture">Fichiers STL &amp; BOM</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>© 2026 Projet Desk Bud NSI — Dijon · Tous droits réservés · Licence Open-Source MIT</p>
+      <p>Conception CAO, électronique &amp; développement web par l'équipe d'élèves NSI</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
