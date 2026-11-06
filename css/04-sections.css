@@ -390,6 +390,95 @@
 }
 
 /* ==========================================================================
+   PROTOTYPE 3D · ROTATION LIEE AU DEFILEMENT
+   ========================================================================== */
+.model-viewer-section {
+  height: 200svh;
+  position: relative;
+  border-bottom: 1px solid var(--border);
+}
+
+.model-viewer-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  height: 100svh;
+  min-height: 36rem;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.model-viewer-layout {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  align-items: center;
+  gap: clamp(2rem, 5vw, 4rem);
+}
+
+.model-viewer-desc {
+  color: var(--muted);
+  max-width: 42ch;
+  margin-block: 1rem 1.75rem;
+}
+
+.model-viewer-progress {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+}
+
+.model-viewer-progress strong {
+  color: var(--accent);
+}
+
+.model-stage {
+  position: relative;
+  min-width: 0;
+  height: min(68svh, 42rem);
+  min-height: 20rem;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: #15181f;
+}
+
+.model-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.model-stage-caption {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  left: 1rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  color: #b7bdc9;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  pointer-events: none;
+}
+
+.model-stage-caption #modelStatus {
+  text-align: right;
+}
+
+#modelStatus.is-error {
+  color: #ff9a79;
+}
+
+/* ==========================================================================
    10. CHAPITRE 04 · MODULES & FENÊTRE DE CODE
    ========================================================================== */
 .modules-showcase {
@@ -504,4 +593,3 @@
   color: var(--muted);
   font-size: 0.8rem;
 }
-
