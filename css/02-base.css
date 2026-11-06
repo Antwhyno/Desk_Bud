@@ -1,0 +1,81 @@
+/* ==========================================================================
+   2. RESET & TRANSITIONS GLOBALES
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  overflow-x: hidden;
+  transition: background-color 600ms var(--ease-out-expo), color 600ms var(--ease-out-expo);
+  -webkit-font-smoothing: antialiased;
+}
+
+.svg-filters {
+  position: absolute;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.container {
+  width: min(1200px, 92vw);
+  margin-inline: auto;
+  position: relative;
+  z-index: 2;
+}
+
+.section {
+  padding-block: clamp(4.5rem, 9vw, 8rem);
+  position: relative;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ==========================================================================
+   3. FIL CONDUCTEUR CENTRAL (STREAM 4PX -> 2PX MOBILE)
+   ========================================================================== */
+.center-stream {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 100svh;
+  background: rgba(128, 128, 128, 0.08);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.center-stream-fill {
+  width: 100%;
+  height: 100%;
+  background: var(--accent);
+  transform: scaleY(0);
+  transform-origin: top;
+  opacity: 0.35;
+}
+
+/* ==========================================================================
+   12. ANIMATIONS D'ENTRÉE SUR COURBES DE VITESSE (SPEED CURVES)
+   ========================================================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 700ms var(--ease-out-expo), transform 700ms var(--ease-out-expo);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+

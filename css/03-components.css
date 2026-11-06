@@ -1,0 +1,446 @@
+/* ==========================================================================
+   4. HEADER & TÉLÉMÉTRIE D'ASCENSION
+   ========================================================================== */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  border-bottom: 1px solid var(--border);
+  transition: background-color 600ms var(--ease-out-expo), border-color 600ms var(--ease-out-expo);
+}
+
+.header-inner {
+  width: min(1260px, 94vw);
+  height: 4rem;
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: -0.02em;
+}
+
+.brand-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.telemetry-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  background: var(--surface);
+}
+
+.telemetry-value {
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.telemetry-status {
+  color: var(--muted);
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--ink);
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: color 200ms var(--ease-out-expo);
+}
+
+.nav-links a:hover {
+  color: var(--ink);
+}
+
+.nav-links .nav-cta {
+  color: var(--ink);
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+/* ==========================================================================
+   6. TICKER (TEXTE CLAMP & VITESSE PX/S)
+   ========================================================================== */
+.ticker-wrap {
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  padding-block: 0.75rem;
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  white-space: nowrap;
+  font-family: var(--font-mono);
+  font-size: clamp(14px, 4vw, 20px);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  will-change: transform;
+}
+
+
+/* Boutons, simulateur OLED et blocs de code */
+
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.4rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: transform 220ms var(--ease-out-expo), background-color 300ms var(--ease-out-expo), border-color 300ms var(--ease-out-expo);
+  cursor: pointer;
+}
+
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+
+/* Le bouton utilise --ink ou --accent pour toujours s'adapter à la palette active */
+.btn-primary {
+  background: var(--ink);
+  color: var(--bg);
+  border: 1px solid var(--ink);
+}
+
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--border);
+}
+
+
+/* Simulateur interactif du Desk Bud dans le Hero */
+.preview-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.25rem;
+}
+
+
+.preview-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--muted);
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--border);
+}
+
+
+.status-dot {
+  color: #16a34a;
+  font-weight: 600;
+}
+
+
+.deskbud-stage {
+  padding: 2rem 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+
+.deskbud-chassis {
+  width: 260px;
+  background: #e4e5e9;
+  border: 2px solid #ffffff;
+  border-radius: 28px;
+  padding: 1.2rem;
+  position: relative;
+  box-shadow: inset 0 -6px 0 rgba(0, 0, 0, 0.08);
+}
+
+
+.deskbud-ears span {
+  position: absolute;
+  top: 38%;
+  width: 10px;
+  height: 44px;
+  background: var(--accent);
+  border-radius: 4px;
+}
+
+
+.deskbud-ears span:first-child { left: -12px; }
+
+.deskbud-ears span:last-child  { right: -12px; }
+
+
+.deskbud-screen {
+  background: #0b0d13;
+  border-radius: 16px;
+  height: 135px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  border: 3px solid #232733;
+  position: relative;
+}
+
+
+.oled-eyes {
+  display: flex;
+  gap: 2.2rem;
+}
+
+
+.eye {
+  width: 28px;
+  height: 28px;
+  background: #38bdf8;
+  border-radius: 7px;
+  transition: all 280ms var(--ease-out-expo);
+}
+
+
+.oled-mouth {
+  width: 34px;
+  height: 10px;
+  border-bottom: 4px solid #38bdf8;
+  border-radius: 0 0 20px 20px;
+  transition: all 280ms var(--ease-out-expo);
+}
+
+
+.oled-subtext {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: #38bdf8;
+  letter-spacing: 0.08em;
+}
+
+
+/* États d'expressions interactives */
+.deskbud-screen[data-mode="happy"] .eye {
+  height: 12px;
+  border-radius: 12px 12px 2px 2px;
+  background: #4ade80;
+}
+
+.deskbud-screen[data-mode="happy"] .oled-mouth {
+  width: 44px;
+  border-color: #4ade80;
+}
+
+.deskbud-screen[data-mode="happy"] .oled-subtext {
+  color: #4ade80;
+}
+
+
+.deskbud-screen[data-mode="code"] .eye {
+  width: 32px;
+  height: 8px;
+  border-radius: 2px;
+  background: #fb923c;
+}
+
+.deskbud-screen[data-mode="code"] .oled-mouth {
+  width: 22px;
+  border-bottom: 3px solid #fb923c;
+  border-radius: 0;
+}
+
+.deskbud-screen[data-mode="code"] .oled-subtext {
+  color: #fb923c;
+}
+
+
+.deskbud-controls {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.45rem;
+  margin-top: 1rem;
+}
+
+
+.tactile-btn {
+  background: #cfd2d9;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 6px;
+  padding: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #181a20;
+  cursor: pointer;
+  transition: transform 150ms var(--ease-out-expo), background-color 150ms;
+}
+
+
+.tactile-btn.active,
+.tactile-btn:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+
+.preview-caption {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--muted);
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--border);
+}
+
+
+.module-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+
+.module-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+
+.module-num {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+}
+
+
+.module-card h3 {
+  margin-block: 0.35rem 0.5rem;
+  font-size: 1.2rem;
+}
+
+
+.module-card p {
+  color: var(--muted);
+  font-size: 0.92rem;
+  margin-bottom: 0.85rem;
+}
+
+
+.module-card code {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  color: var(--ink);
+}
+
+
+.code-window {
+  background: #0c0f14;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  color: #e2e8f0;
+}
+
+
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.8rem 1.2rem;
+  background: #151922;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+
+.code-window pre {
+  padding: 1.4rem;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.65;
+}
+
+
+.kw  { color: #f472b6; }
+
+.cls { color: #38bdf8; }
+
+.fn  { color: #a78bfa; }
+
+.str { color: #4ade80; }
+
+.num { color: #fb923c; }
+
+.cm  { color: #64748b; }

@@ -1,0 +1,51 @@
+/* ==========================================================================
+   1. DESIGN TOKENS & PALETTES DYNAMIQUES (FLAVOUR SCROLL TRICK)
+   ========================================================================== */
+:root,
+:root[data-flavour="paper"] {
+  --bg: rgb(246, 244, 238);
+  --surface: rgb(238, 234, 225);
+  --ink: rgb(20, 22, 25);
+  --muted: rgb(92, 96, 106);
+  --border: rgba(20, 22, 25, 0.12);
+  --accent: rgb(255, 79, 0); /* International Orange */
+  --accent-ink: rgb(255, 255, 255);
+}
+
+:root[data-flavour="warm"] {
+  --bg: rgb(241, 231, 218);
+  --surface: rgb(232, 219, 202);
+  --ink: rgb(52, 34, 24);
+  --muted: rgb(115, 88, 72);
+  --border: rgba(52, 34, 24, 0.14);
+  --accent: rgb(217, 70, 15);
+  --accent-ink: rgb(255, 255, 255);
+}
+
+:root[data-flavour="obsidian"] {
+  --bg: rgb(12, 14, 18);
+  --surface: rgb(21, 24, 31);
+  --ink: rgb(244, 244, 246);
+  --muted: rgb(148, 154, 168);
+  --border: rgba(255, 255, 255, 0.1);
+  --accent: rgb(255, 79, 0);
+  --accent-ink: rgb(255, 255, 255);
+}
+
+:root[data-flavour="forest"] {
+  --bg: rgb(22, 33, 29);
+  --surface: rgb(31, 46, 41);
+  --ink: rgb(236, 244, 239);
+  --muted: rgb(154, 178, 166);
+  --border: rgba(236, 244, 239, 0.12);
+  --accent: rgb(56, 189, 248);
+  --accent-ink: rgb(10, 16, 20);
+}
+
+:root {
+  --font-serif: 'Instrument Serif', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
