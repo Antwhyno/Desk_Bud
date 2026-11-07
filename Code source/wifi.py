@@ -1,8 +1,8 @@
 import network
 from time import sleep_ms
 
-SSID = "FreeboxVAP"
-MOT_DE_PASSE = "Cave-73770609&211215#"
+SSID = "Nom WIFI"
+MOT_DE_PASSE = "Code WIFI"
 
 def connexion_wifi():
     wlan = network.WLAN(network.STA_IF)
