@@ -3,6 +3,11 @@ from time import sleep_ms
 from sh1106 import SH1106_I2C
 import wifi
 
+import yeux
+
+yeux.mettre_a_jour(oled, t)
+yeux.definir_expression("joyeuse")
+
 from boutons import gauche, droite, ok
 from pages import PAGES
 
