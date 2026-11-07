@@ -28,6 +28,9 @@
   }
 
   .model-viewer-layout {
+    grid-template-areas:
+      "info"
+      "stage";
     gap: 1.5rem;
   }
 

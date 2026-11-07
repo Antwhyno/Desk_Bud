@@ -1,5 +1,6 @@
 const MODEL_URL = new URL("../../assets/Desk_Bud-V1.gltf", import.meta.url);
 const ROTATION = Math.PI * 2;
+const INITIAL_ROTATION = (430 / 360) * ROTATION;
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
 export function initModelViewer() {
@@ -14,8 +15,8 @@ export function initModelViewer() {
 
   let visible = false;
   let frameId = 0;
-  let targetRotation = 0;
-  let currentRotation = 0;
+  let targetRotation = INITIAL_ROTATION;
+  let currentRotation = INITIAL_ROTATION;
   let pivot;
   let renderer;
   let camera;
@@ -33,7 +34,7 @@ export function initModelViewer() {
       1
     );
 
-    targetRotation = progress * ROTATION;
+    targetRotation = INITIAL_ROTATION + progress * ROTATION;
     rotationValue.textContent = `${String(Math.round(progress * 360)).padStart(3, "0")}°`;
   }
 
