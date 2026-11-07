@@ -411,9 +411,18 @@
 
 .model-viewer-layout {
   display: grid;
-  grid-template-columns: 0.8fr 1.2fr;
+  grid-template-areas: "stage info";
+  grid-template-columns: 1.2fr 0.8fr;
   align-items: center;
   gap: clamp(2rem, 5vw, 4rem);
+}
+
+.model-viewer-info {
+  grid-area: info;
+}
+
+.model-stage {
+  grid-area: stage;
 }
 
 .model-viewer-desc {
