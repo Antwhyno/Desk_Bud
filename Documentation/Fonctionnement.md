@@ -11,7 +11,7 @@ Ecran sh 1106
 cables
 fil dupont
 breadboard
-boutons
+boutons poussoirs a 2 broches
 
 ## chacun fais la meme chose:
 eliott electronique et programme de l'ESP32
