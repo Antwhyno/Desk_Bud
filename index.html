@@ -214,15 +214,28 @@
 
         <div class="editorial-columns reveal">
           <p class="editorial-p">
-            Le projet est né d'un constat partagé par notre groupe dès la rentrée de Terminale. Entre la préparation du
-            Bac, les projets de spécialité et Parcoursup, nos sessions de révision sont constamment fragmentées par les
-            notifications du smartphone posé à côté du clavier.
+            Le projet est parti d'un problème que nous avons tous rencontré dès la rentrée de Terminale
+            : il est difficile de rester concentré lorsqu'on est régulièrement interrompu par son
+            téléphone. Entre les révisions du bac, les projets de spécialité et Parcoursup, les
+            notifications viennent facilement perturber nos moments de travail.
           </p>
           <p class="editorial-p">
-            Plutôt que d'ajouter une énième application mobile, nous avons décidé d'appliquer le programme de
-            <strong>Numérique et Sciences Informatiques (NSI)</strong> à un objet tangible : un petit robot compagnon
-            posé sous l'écran, capable de gérer nos cycles de travail, d'afficher la télémétrie de nos scripts Python et
-            de réagir à l'environnement sonore sans jamais capter notre attention inutilement.
+            Plutôt que de créer une nouvelle application mobile, nous avons choisi de mettre en pratique
+            ce que nous avons appris en <strong>Numérique et Sciences Informatiques (NSI)</strong> à travers
+            un objet concret : un petit robot compagnon installé sous l'écran de l'ordinateur.
+
+            Le Desk Bud propose plusieurs fonctionnalités : il peut servir de chronomètre ou de minuteur,
+            mais aussi signaler l'arrivée de notifications grâce à différentes réactions. L'idée est simple :
+            permettre à l'utilisateur de rester concentré sur son travail tout en étant informé de ce qui se
+            passe sur son ordinateur, sans avoir besoin de consulter constamment son téléphone ou de changer
+            de fenêtre.
+
+            À terme, nous souhaitons également connecter le Desk Bud à des programmes extérieurs, comme Claude,
+            afin qu'il puisse signaler lorsqu'une intelligence artificielle a terminé de générer une réponse.
+            Nous sommes partis d'un constat simple : certaines requêtes peuvent prendre plusieurs minutes à être
+            traitées. Plutôt que de vérifier régulièrement si la réponse est prête, l'utilisateur est
+            averti directement par son petit compagnon. Il peut ainsi mieux organiser son temps et
+            rester concentré sur ses autres tâches.
           </p>
         </div>
 
@@ -232,9 +245,13 @@
             <div class="card-meta">01 / ARCHITECTURE SYSTÈME EMBARQUÉ</div>
             <h3>Un pont concret entre structures de données et électronique</h3>
             <p>
-              Le Desk Bud met en œuvre une file de priorité (FIFO) pour ordonnancer les événements (alertes Pomodoro,
-              requêtes API météo, capteurs) et un automate fini à 6 états pour piloter ses expressions faciales et ses
-              servomoteurs sans bloquer la boucle principale.
+              Le Desk Bud utilise une file d'attente de type FIFO (First In, First Out) pour gérer les
+              différents événements dans leur ordre d'arrivée : alertes du minuteur Pomodoro, données
+              météo ou encore informations provenant des capteurs.
+
+              Son comportement repose également sur un automate fini composé de six états, qui permet de
+              contrôler ses expressions faciales. Cette organisation lui permet de réagir aux événements
+              sans interrompre les autres tâches en cours.
             </p>
             <div class="data-line">
               <span><strong>240 MHz</strong> Dual-Core Xtensa</span>
@@ -259,7 +276,7 @@
           <article class="bento-card reveal">
             <div class="card-meta">03 / RÉSEAU &amp; API</div>
             <h3>Synchronisation locale WebSocket</h3>
-            <p>
+            <p> #alors la je sais pas ce qui est raconté je peux pas aider...
               Un serveur Python léger tourne sur l'ordinateur et communique en JSON sur le réseau local avec le Desk Bud
               lorsqu'un test unitaire échoue ou réussit.
             </p>
@@ -313,14 +330,7 @@
                 </div>
               </li>
               <li>
-                <span class="spec-code">B2</span>
-                <div>
-                  <strong>Servomoteur MG90S Pignons Métal</strong>
-                  <p>Inclinaison expressive de la tête de -25° à +35° en PWM.</p>
-                </div>
-              </li>
-              <li>
-                <span class="spec-code">C3</span>
+                <span class="spec-code">C3</span> #pas encore mais ça peut encore venir
                 <div>
                   <strong>Capteur Tactile Capacitif TTP223</strong>
                   <p>Logé sous le sommet du crâne pour lancer ou acquitter un cycle.</p>
@@ -461,8 +471,12 @@
           <span class="chapter-index">Chapitre 03 · L'année</span>
           <h2 class="chapter-title">Neuf mois. Du premier croquis sur papier à l'oral du Bac.</h2>
           <p class="chapter-sub">
-            La réalisation tisse en parallèle deux fils : concevoir le matériel et développer l'intelligence logicielle.
-            Chaque mois, un jalon concret validé en laboratoire de NSI.
+            La réalisation du Desk Bud repose sur deux axes complémentaires : la conception de sa partie
+            matérielle et le développement de son logiciel. Ces deux aspects avancent en parallèle afin de
+            donner progressivement vie au robot.
+
+            Chaque séance, une nouvelle étape est franchie (étude, soudures, résolutions de problèmes,
+            design...), avec un objectif concret à atteindre mois après mois..
           </p>
         </div>
 
@@ -487,7 +501,7 @@
             </div>
             <div class="timeline-body">
               <h3>Modélisation CAO &amp; Premier prototype PLA</h3>
-              <p>Conception du boîtier articulé, intégration des tolérances de 0,2 mm pour l'écran OLED et pose des
+              <p>Conception du boîtier, intégration des tolérances de 0,2 mm pour l'écran OLED et pose des
                 premiers inserts filetés en laiton au fer à souder.</p>
               <span class="timeline-metric">Livrable : Châssis Rev.A · 115 g · Chanfreins 45°</span>
             </div>
@@ -550,25 +564,19 @@
             <article class="module-card reveal">
               <span class="module-num">MODULE 01</span>
               <h3>Gestionnaire Pomodoro &amp; Fatigue</h3>
-              <p>Cycles de 25 minutes de travail profond suivis de 5 minutes de pause, avec rappel postural par
-                mouvement doux de la tête.</p>
+              <p>
+                Cycles de 25 minutes de travail suivis de 5 minutes de pause.
+              </p>
               <code>state.transition("FOCUS", duration=1500)</code>
             </article>
 
             <article class="module-card reveal">
               <span class="module-num">MODULE 02</span>
-              <h3>Sentinelle de Code (IDE Watcher)</h3>
-              <p>Surveille le terminal de l'élève : le Desk Bud sourit quand les tests passent et affiche la ligne
-                d'erreur en cas d'exception Python.</p>
               <code>ws.send(json.dumps({"status": "PASS"}))</code>
             </article>
 
             <article class="module-card reveal">
               <span class="module-num">MODULE 03</span>
-              <h3>Ambiance &amp; Décibels</h3>
-              <p>Échantillonne le niveau sonore ambiant sans jamais enregistrer la voix, pour alerter lorsque le bruit
-                dépasse le seuil de concentration.</p>
-              <code>db_smooth = 0.85 * prev + 0.15 * raw</code>
             </article>
           </div>
 
@@ -620,7 +628,7 @@
             <h3>Transparence &amp; Open-Hardware</h3>
             <p>
               Le coût total de revient d'un Desk Bud est inférieur à <strong>18,50 €</strong> (ESP32-C3 super mini,
-              écran OLED 0,96", micro-servomoteur MG90S, capteur TTP223 et 115 g de filament PLA). Aucune dépendance
+              écran OLED 1,3", capteur TTP223 et 115 g de filament PLA). Aucune dépendance
               cloud payante n'est requise : tout fonctionne en local.
             </p>
           </div>
