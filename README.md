@@ -18,3 +18,4 @@ Taches:
 - remplacer la chronologie de la timeline
 - ajouter des photos (venant du groupe)
 - expliquer le focntionnement des fonctions (ex ping serveur mc, météo)
+- mettre une page sur les membrees du groupe
