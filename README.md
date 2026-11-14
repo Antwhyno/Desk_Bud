@@ -14,6 +14,7 @@ Il y a des infos dans documentation
 dedicace au goat https://arthurjeaugey.com/
 
 Taches:
-- il faut supprimer la simulation du desk_bud au debut
+- il faut supprimer la simulation du desk_bud au debut sinon la remplacer par la vraie, cad utiliser le vrai fichier python et aficher le resultat de l'ecran.
 - remplacer la chronologie de la timeline
 - ajouter des photos (venant du groupe)
+- expliquer le focntionnement des fonctions (ex ping serveur mc, météo)
