@@ -12,3 +12,8 @@ ce n'est pas une version finale.
 Il y a des infos dans documentation
 
 dedicace au goat https://arthurjeaugey.com/
+
+Taches:
+- il faut supprimer la simulation du desk_bud au debut
+- remplacer la chronologie de la timeline
+- ajouter des photos (venant du groupe)
