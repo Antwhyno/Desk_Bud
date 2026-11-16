@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="fr" data-flavour="paper">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Desk Bud — Projet NSI · Compagnon Robotique de Bureau</title>
-  <meta name="description" content="Présentation du projet de spécialité NSI : Desk Bud, un compagnon robotique interactif open-source conçu de la modélisation 3D au code embarqué.">
+  <meta name="description"
+    content="Présentation du projet de spécialité NSI : Desk Bud, un compagnon robotique interactif open-source conçu de la modélisation 3D au code embarqué.">
   <script type="importmap">
     {
       "imports": {
@@ -16,9 +18,12 @@
   <!-- Polices Google Fonts : Instrument Serif (Éditorial), Plus Jakarta Sans (UI), JetBrains Mono (Technique) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
   <!-- Filtre SVG pour l'effet Sketch / Blueprint (extraction des contours) -->
@@ -26,7 +31,8 @@
     <defs>
       <filter id="sketch-filter">
         <feColorMatrix type="saturate" values="0" result="gray" />
-        <feConvolveMatrix in="gray" order="3" kernelMatrix="-1 -1 -1 -1 8 -1 -1 -1 -1" preserveAlpha="true" result="edges" />
+        <feConvolveMatrix in="gray" order="3" kernelMatrix="-1 -1 -1 -1 8 -1 -1 -1 -1" preserveAlpha="true"
+          result="edges" />
         <feComponentTransfer in="edges" result="inverted">
           <feFuncR type="table" tableValues="1 0" />
           <feFuncG type="table" tableValues="1 0" />
@@ -82,30 +88,31 @@
         <div class="desk-obj obj-coffee" data-speed="0.18">
           <span class="obj-tag">07:00 · Caféine</span>
           <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.8">
-            <circle cx="40" cy="40" r="28" stroke-dasharray="3 3"/>
-            <circle cx="40" cy="40" r="20"/>
-            <path d="M60 36h8a4 4 0 0 1 0 8h-8"/>
+            <circle cx="40" cy="40" r="28" stroke-dasharray="3 3" />
+            <circle cx="40" cy="40" r="20" />
+            <path d="M60 36h8a4 4 0 0 1 0 8h-8" />
           </svg>
         </div>
         <div class="desk-obj obj-square" data-speed="0.32">
           <span class="obj-tag">CAO · Échelle 1:1</span>
           <svg viewBox="0 0 90 90" fill="none" stroke="currentColor" stroke-width="1.8">
-            <polygon points="10,80 80,80 10,10"/>
-            <polygon points="24,68 54,68 24,38"/>
+            <polygon points="10,80 80,80 10,10" />
+            <polygon points="24,68 54,68 24,38" />
           </svg>
         </div>
         <div class="desk-obj obj-chip" data-speed="0.25">
-          <span class="obj-tag">MCU · ESP32-S3</span>
+          <span class="obj-tag">MCU · ESP32-C3 Super mini</span>
           <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.8">
-            <rect x="22" y="22" width="36" height="36" rx="4"/>
-            <path d="M12 30h10M12 40h10M12 50h10M58 30h10M58 40h10M58 50h10M30 12v10M40 12v10M50 12v10M30 58v10M40 58v10M50 58v10"/>
+            <rect x="22" y="22" width="36" height="36" rx="4" />
+            <path
+              d="M12 30h10M12 40h10M12 50h10M58 30h10M58 40h10M58 50h10M30 12v10M40 12v10M50 12v10M30 58v10M40 58v10M50 58v10" />
           </svg>
         </div>
         <div class="desk-obj obj-pen" data-speed="0.42">
           <span class="obj-tag">Cotes · ±0.1 mm</span>
           <svg viewBox="0 0 100 30" fill="none" stroke="currentColor" stroke-width="1.8">
-            <rect x="20" y="9" width="65" height="12" rx="2"/>
-            <polygon points="8,15 20,9 20,21"/>
+            <rect x="20" y="9" width="65" height="12" rx="2" />
+            <polygon points="8,15 20,9 20,21" />
           </svg>
         </div>
       </div>
@@ -118,7 +125,8 @@
             <em>au sommet du code.</em>
           </h1>
           <p class="hero-lead">
-            Concevoir un compagnon robotique de bureau pour retrouver la concentration, de l'efficacité et avoir les informations qui comptent 
+            Concevoir un compagnon robotique de bureau pour retrouver la concentration, de l'efficacité et avoir les
+            informations qui comptent
             sous la main.
           </p>
 
@@ -138,7 +146,7 @@
             </div>
             <div class="meta-item">
               <dt>Cœur</dt>
-              <dd>ESP32 C3</dd>
+              <dd>ESP32 C3 super mini</dd>
             </div>
           </dl>
 
@@ -189,6 +197,10 @@
       <div class="ticker-track" id="tickerTrack">
         <span>  PROJET TERMINALE NSI · ARCHITECTURE MATÉRIELLE &amp; LOGICIELLE · MODÉLISATION &amp; IMPRESSION 3D · PYTHON &amp; MICROPYTHON · TEAM NSI · AVEC JUJU · </span>
         <span> PROJET TERMINALE NSI · ARCHITECTURE MATÉRIELLE &amp; LOGICIELLE · MODÉLISATION &amp; IMPRESSION 3D · PYTHON &amp; MICROPYTHON · TEAM NSI · AVEC JUJU · </span>
+        <span>PROJET TERMINALE NSI · ARCHITECTURE MATÉRIELLE &amp; LOGICIELLE · MODÉLISATION 3D SANS SUPPORT · PYTHON
+          &amp; MICROPYTHON · PROTOCOLE I2C / WEBSOCKET · ZÉRO DISTRACTION · </span>
+        <span> PROJET TERMINALE NSI · ARCHITECTURE MATÉRIELLE &amp; LOGICIELLE · MODÉLISATION 3D SANS SUPPORT · PYTHON
+          &amp; MICROPYTHON · PROTOCOLE I2C / WEBSOCKET · ZÉRO DISTRACTION · </span>
       </div>
     </div>
 
@@ -208,6 +220,28 @@
           </p>
           <p class="editorial-p">
             Deplus ce desk bud possède de nombreuses fonctionnalités comme le chronometre, minuteur, pomodoro... Il pourra ainsi vous accompagné dans vos session de revisions. Nos ingénieurs et designer lui ont créer une interface simpatique et interactive. Il est un vrai compagnon de bureau
+            Le projet est parti d'un problème que nous avons tous rencontré dès la rentrée de Terminale
+            : il est difficile de rester concentré lorsqu'on est régulièrement interrompu par son
+            téléphone. Entre les révisions du bac, les projets de spécialité et Parcoursup, les
+            notifications viennent facilement perturber nos moments de travail.
+          </p>
+          <p class="editorial-p">
+            Plutôt que de créer une nouvelle application mobile, nous avons choisi de mettre en pratique
+            ce que nous avons appris en <strong>Numérique et Sciences Informatiques (NSI)</strong> à travers
+            un objet concret : un petit robot compagnon installé sous l'écran de l'ordinateur.
+
+            Le Desk Bud propose plusieurs fonctionnalités : il peut servir de chronomètre ou de minuteur,
+            mais aussi signaler l'arrivée de notifications grâce à différentes réactions. L'idée est simple :
+            permettre à l'utilisateur de rester concentré sur son travail tout en étant informé de ce qui se
+            passe sur son ordinateur, sans avoir besoin de consulter constamment son téléphone ou de changer
+            de fenêtre.
+
+            À terme, nous souhaitons également connecter le Desk Bud à des programmes extérieurs, comme Claude,
+            afin qu'il puisse signaler lorsqu'une intelligence artificielle a terminé de générer une réponse.
+            Nous sommes partis d'un constat simple : certaines requêtes peuvent prendre plusieurs minutes à être
+            traitées. Plutôt que de vérifier régulièrement si la réponse est prête, l'utilisateur est
+            averti directement par son petit compagnon. Il peut ainsi mieux organiser son temps et
+            rester concentré sur ses autres tâches.
           </p>
         </div>
 
@@ -217,7 +251,13 @@
             <div class="card-meta">01 / ARCHITECTURE SYSTÈME EMBARQUÉ</div>
             <h3>Un pont concret entre structures de données et électronique</h3>
             <p>
-              Le Desk Bud met en œuvre une file de priorité (FIFO) pour ordonnancer les événements (alertes Pomodoro, requêtes API météo, capteurs) et un automate fini à 6 états pour piloter ses expressions faciales et ses servomoteurs sans bloquer la boucle principale.
+              Le Desk Bud utilise une file d'attente de type FIFO (First In, First Out) pour gérer les
+              différents événements dans leur ordre d'arrivée : alertes du minuteur Pomodoro, données
+              météo ou encore informations provenant des capteurs.
+
+              Son comportement repose également sur un automate fini composé de six états, qui permet de
+              contrôler ses expressions faciales. Cette organisation lui permet de réagir aux événements
+              sans interrompre les autres tâches en cours.
             </p>
             <div class="data-line">
               <span><strong>240 MHz</strong> Dual-Core Xtensa</span>
@@ -230,7 +270,8 @@
             <div class="card-meta">02 / FABRICATION ADDITIVE</div>
             <h3>Châssis imprimé en 3D sans support</h3>
             <p>
-              Conçu en CAO paramétrique avec des chanfreins à 45°, des inserts filetés en laiton posés à chaud et une base lestée antidérapante.
+              Conçu en CAO paramétrique avec des chanfreins à 45°, des inserts filetés en laiton posés à chaud et une
+              base lestée antidérapante.
             </p>
             <div class="data-line">
               <span><strong>115 g</strong> PLA Mat</span>
@@ -241,8 +282,9 @@
           <article class="bento-card reveal">
             <div class="card-meta">03 / RÉSEAU &amp; API</div>
             <h3>Synchronisation locale WebSocket</h3>
-            <p>
-              Un serveur Python léger tourne sur l'ordinateur et communique en JSON sur le réseau local avec le Desk Bud lorsqu'un test unitaire échoue ou réussit.
+            <p> #alors la je sais pas ce qui est raconté je peux pas aider...
+              Un serveur Python léger tourne sur l'ordinateur et communique en JSON sur le réseau local avec le Desk Bud
+              lorsqu'un test unitaire échoue ou réussit.
             </p>
             <div class="data-line">
               <span><strong>WS://</strong> Port 8765</span>
@@ -254,7 +296,9 @@
             <div class="card-meta">04 / PROGRAMME OFFICIEL NSI</div>
             <h3>Quatre piliers du programme mobilisés dans un seul objet</h3>
             <p>
-              Structures de données (graphes d'états et files d'événements), Architectures matérielles et systèmes d'exploitation (bus I2C, interruptions GPIO), Réseaux (sockets TCP/IP) et Algorithmique avancée (lissage exponentiel des capteurs).
+              Structures de données (graphes d'états et files d'événements), Architectures matérielles et systèmes
+              d'exploitation (bus I2C, interruptions GPIO), Réseaux (sockets TCP/IP) et Algorithmique avancée (lissage
+              exponentiel des capteurs).
             </p>
             <div class="data-line">
               <span><strong>Python 3.12</strong> Back-end</span>
@@ -270,15 +314,17 @@
          CHAPITRE 02 · DU BLUEPRINTS AU RENDU (Sketch-to-Render Sticky)
          Palette : Obsidian / Dark Technical
          ========================================================= -->
-    <section id="architecture" class="sketch-scroll-section" data-flavour-section="obsidian" data-status="Chapitre 02 · Coupe CAO">
+    <section id="architecture" class="sketch-scroll-section" data-flavour-section="obsidian"
+      data-status="Chapitre 02 · Coupe CAO">
       <div class="sketch-sticky-wrapper">
         <div class="container sketch-layout">
-          
+
           <div class="sketch-info">
             <span class="chapter-index">Chapitre 02 · Du dessin à la matière</span>
             <h2 class="chapter-title">De l'esquisse CAO à l'assemblage final.</h2>
             <p class="sketch-desc">
-              Faites défiler pour balayer le plan d'ingénierie vers le prototype assemblé. Les 20 premiers pourcents maintiennent le schéma technique avant de révéler l'objet réel.
+              Faites défiler pour balayer le plan d'ingénierie vers le prototype assemblé. Les 20 premiers pourcents
+              maintiennent le schéma technique avant de révéler l'objet réel.
             </p>
 
             <ul class="spec-list">
@@ -301,6 +347,10 @@
                 <div>
                   <strong>Piles AAA</strong>
                   <p>Allimentation rechargeable avec des piles. Branchement possible en USB C.</p>
+                <span class="spec-code">C3</span>
+                <div>
+                  <strong>Capteur Tactile Capacitif TTP223 (pas encore inclus mais peut l'être)</strong>
+                  <p>Logé sous le sommet du crâne pour lancer ou acquitter un cycle.</p>
                 </div>
               </li>
             </ul>
@@ -327,19 +377,19 @@
                 <text x="15" y="210" fill="#94A3B8" font-family="JetBrains Mono" font-size="11">H = 112 mm</text>
 
                 <!-- Corps Esquisse filaire -->
-                <rect x="115" y="80" width="270" height="200" rx="34" stroke="#E2E8F0" stroke-width="2.5"/>
-                <rect x="145" y="108" width="210" height="125" rx="16" stroke="#94A3B8" stroke-width="2"/>
+                <rect x="115" y="80" width="270" height="200" rx="34" stroke="#E2E8F0" stroke-width="2.5" />
+                <rect x="145" y="108" width="210" height="125" rx="16" stroke="#94A3B8" stroke-width="2" />
                 <!-- Yeux esquisse -->
-                <circle cx="205" cy="162" r="20" stroke="#E2E8F0" stroke-width="2" stroke-dasharray="5 3"/>
-                <circle cx="295" cy="162" r="20" stroke="#E2E8F0" stroke-width="2" stroke-dasharray="5 3"/>
-                <path d="M230 198 Q250 212 270 198" stroke="#E2E8F0" stroke-width="2"/>
+                <circle cx="205" cy="162" r="20" stroke="#E2E8F0" stroke-width="2" stroke-dasharray="5 3" />
+                <circle cx="295" cy="162" r="20" stroke="#E2E8F0" stroke-width="2" stroke-dasharray="5 3" />
+                <path d="M230 198 Q250 212 270 198" stroke="#E2E8F0" stroke-width="2" />
                 <!-- Socle articulé esquisse -->
-                <path d="M195 280 L175 335 L325 335 L305 280 Z" stroke="#E2E8F0" stroke-width="2"/>
-                <rect x="150" y="335" width="200" height="22" rx="8" stroke="#E2E8F0" stroke-width="2.5"/>
+                <path d="M195 280 L175 335 L325 335 L305 280 Z" stroke="#E2E8F0" stroke-width="2" />
+                <rect x="150" y="335" width="200" height="22" rx="8" stroke="#E2E8F0" stroke-width="2.5" />
                 <!-- Annotations fléchées -->
-                <line x1="355" y1="140" x2="425" y2="115" stroke="#FF4F00" stroke-width="1.5"/>
+                <line x1="355" y1="140" x2="425" y2="115" stroke="#FF4F00" stroke-width="1.5" />
                 <text x="430" y="118" fill="#FF4F00" font-family="JetBrains Mono" font-size="11">SSD1306</text>
-                <line x1="315" y1="308" x2="420" y2="308" stroke="#FF4F00" stroke-width="1.5"/>
+                <line x1="315" y1="308" x2="420" y2="308" stroke="#FF4F00" stroke-width="1.5" />
                 <text x="425" y="312" fill="#FF4F00" font-family="JetBrains Mono" font-size="11">PWM MG90S</text>
               </svg>
             </div>
@@ -349,36 +399,40 @@
               <svg class="bud-illustration" viewBox="0 0 500 420" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                   <linearGradient id="bodyGrad" x1="115" y1="80" x2="385" y2="280" gradientUnits="userSpaceOnUse">
-                    <stop offset="0%" stop-color="#F4F4F6"/>
-                    <stop offset="100%" stop-color="#D4D6DD"/>
+                    <stop offset="0%" stop-color="#F4F4F6" />
+                    <stop offset="100%" stop-color="#D4D6DD" />
                   </linearGradient>
                   <linearGradient id="screenGrad" x1="145" y1="108" x2="355" y2="233" gradientUnits="userSpaceOnUse">
-                    <stop offset="0%" stop-color="#090A0F"/>
-                    <stop offset="100%" stop-color="#141720"/>
+                    <stop offset="0%" stop-color="#090A0F" />
+                    <stop offset="100%" stop-color="#141720" />
                   </linearGradient>
                 </defs>
                 <!-- Ombre portée au sol -->
-                <ellipse cx="250" cy="364" rx="125" ry="14" fill="rgba(0,0,0,0.45)"/>
+                <ellipse cx="250" cy="364" rx="125" ry="14" fill="rgba(0,0,0,0.45)" />
                 <!-- Oreilles / Antennes latérales Orange International -->
-                <rect x="96" y="145" width="19" height="64" rx="6" fill="#FF4F00"/>
-                <rect x="385" y="145" width="19" height="64" rx="6" fill="#FF4F00"/>
+                <rect x="96" y="145" width="19" height="64" rx="6" fill="#FF4F00" />
+                <rect x="385" y="145" width="19" height="64" rx="6" fill="#FF4F00" />
                 <!-- Châssis principal PLA Mat -->
-                <rect x="115" y="80" width="270" height="200" rx="34" fill="url(#bodyGrad)" stroke="#FFFFFF" stroke-width="2"/>
+                <rect x="115" y="80" width="270" height="200" rx="34" fill="url(#bodyGrad)" stroke="#FFFFFF"
+                  stroke-width="2" />
                 <!-- Écran OLED Noir Profond -->
-                <rect x="145" y="108" width="210" height="125" rx="16" fill="url(#screenGrad)" stroke="#272B36" stroke-width="3"/>
+                <rect x="145" y="108" width="210" height="125" rx="16" fill="url(#screenGrad)" stroke="#272B36"
+                  stroke-width="3" />
                 <!-- Yeux lumineux Cyan / Blanc -->
-                <rect x="185" y="144" width="38" height="36" rx="10" fill="#38BDF8"/>
-                <rect x="277" y="144" width="38" height="36" rx="10" fill="#38BDF8"/>
-                <circle cx="212" cy="154" r="5" fill="#FFFFFF"/>
-                <circle cx="304" cy="154" r="5" fill="#FFFFFF"/>
+                <rect x="185" y="144" width="38" height="36" rx="10" fill="#38BDF8" />
+                <rect x="277" y="144" width="38" height="36" rx="10" fill="#38BDF8" />
+                <circle cx="212" cy="154" r="5" fill="#FFFFFF" />
+                <circle cx="304" cy="154" r="5" fill="#FFFFFF" />
                 <!-- Sourire OLED -->
-                <path d="M232 196 Q250 212 268 196" stroke="#38BDF8" stroke-width="4" stroke-linecap="round"/>
+                <path d="M232 196 Q250 212 268 196" stroke="#38BDF8" stroke-width="4" stroke-linecap="round" />
                 <!-- Voyant d'état et gravure -->
-                <circle cx="165" cy="256" r="5" fill="#22C55E"/>
-                <text x="180" y="260" fill="#3F4454" font-family="JetBrains Mono" font-weight="600" font-size="11">DESK BUD // NSI-26</text>
+                <circle cx="165" cy="256" r="5" fill="#22C55E" />
+                <text x="180" y="260" fill="#3F4454" font-family="JetBrains Mono" font-weight="600" font-size="11">DESK
+                  BUD // NSI-26</text>
                 <!-- Cou et Base lestée -->
-                <path d="M195 280 L175 335 L325 335 L305 280 Z" fill="#272A34"/>
-                <rect x="150" y="335" width="200" height="22" rx="8" fill="#181A20" stroke="#3F4454" stroke-width="1.5"/>
+                <path d="M195 280 L175 335 L325 335 L305 280 Z" fill="#272A34" />
+                <rect x="150" y="335" width="200" height="22" rx="8" fill="#181A20" stroke="#3F4454"
+                  stroke-width="1.5" />
               </svg>
             </div>
 
@@ -395,7 +449,8 @@
     <!-- =========================================================
          PROTOTYPE 3D · ANIMATION AU DEFILEMENT
          ========================================================= -->
-    <section id="modele-3d" class="model-viewer-section" data-flavour-section="warm" data-status="Prototype 3D · Rotation">
+    <section id="modele-3d" class="model-viewer-section" data-flavour-section="warm"
+      data-status="Prototype 3D · Rotation">
       <div class="model-viewer-sticky">
         <div class="container model-viewer-layout">
           <div class="model-viewer-info">
@@ -403,6 +458,8 @@
             <h2 class="chapter-title">Le Desk Bud, sous tous ses angles.</h2>
             <p class="model-viewer-desc">
               Modelisation 3D du boitier adapté à tous les composants. <br> Modelisé avec OneShape et rendu avec Three.js.
+              Faites défiler pour découvrir le modèle 3D. Un tour complet révèle chaque détail du prototype avant de
+              poursuivre le récit.
             </p>
             <div class="model-viewer-progress" aria-live="polite">
               <span>ROTATION DU MODÈLE</span>
@@ -411,12 +468,8 @@
           </div>
 
           <div class="model-stage">
-            <canvas
-              id="modelCanvas"
-              class="model-canvas"
-              aria-label="Modèle 3D du Desk Bud, animé par le défilement"
-              role="img"
-            ></canvas>
+            <canvas id="modelCanvas" class="model-canvas" aria-label="Modèle 3D du Desk Bud, animé par le défilement"
+              role="img"></canvas>
             <div class="model-stage-caption">
               <span>DESK BUD · V1</span>
               <span id="modelStatus" role="status">Chargement du modèle 3D…</span>
@@ -438,7 +491,12 @@
           <span class="chapter-index">Chapitre 03 · L'année</span>
           <h2 class="chapter-title">Neuf mois. Du premier croquis sur papier à l'oral du Bac.</h2>
           <p class="chapter-sub">
-            La réalisation tisse en parallèle deux fils : concevoir le matériel et développer l'intelligence logicielle. Chaque mois, un jalon concret validé en laboratoire de NSI.
+            La réalisation du Desk Bud repose sur deux axes complémentaires : la conception de sa partie
+            matérielle et le développement de son logiciel. Ces deux aspects avancent en parallèle afin de
+            donner progressivement vie au robot.
+
+            Chaque séance, une nouvelle étape est franchie (étude, soudures, résolutions de problèmes,
+            design...), avec un objectif concret à atteindre mois après mois..
           </p>
         </div>
 
@@ -451,6 +509,9 @@
             <div class="timeline-body">
               <h3>Définition du cahier des charges &amp; Répartition</h3>
               <p>Réunion de lancement du groupe de 3 élèves. Choix des composants, définition des contraintes d'impression 3D et de l'architecture logicielle. Idée pour l'aspect visuel</p>
+              <p>L'idée, lancée par Clément a été proposée aux autres. Ils ont acceptés de travailler sur ce projet chaquun à leur manière.
+                Antoine, par exemple, à proposé son aide pour la partie design (3D). Eliott, à proposé d'aider à coder en python dans l'esp32.
+                Avec ces trois collaborateurs, le projet à pu démarer.
               <span class="timeline-metric">Livrable : Schéma fonctionnel v1.0 · 3 rôles attribués</span>
             </div>
           </li>
@@ -464,6 +525,9 @@
               <h3>Modélisation CAO &amp; Premier prototype PLA</h3>
               <p>Conception de l'extérieur du boîtier afin d'avoir un apercu du rendu.</p>
               <span class="timeline-metric">Livrable : Châssis Rev.A · 115 g</span>
+              <p>Conception du boîtier, intégration des tolérances de 0,2 mm pour l'écran OLED et pose des
+                premiers inserts filetés en laiton au fer à souder.</p>
+              <span class="timeline-metric">Livrable : Châssis Rev.A · 115 g · Chanfreins 45°</span>
             </div>
           </li>
 
@@ -474,7 +538,8 @@
             </div>
             <div class="timeline-body">
               <h3>Moteur d'expressions &amp; Automate à états finis</h3>
-              <p>Programmation en MicroPython de la machine à états gérant le clignement procédural des yeux, les courbes d'accélération du servomoteur et l'horloge Pomodoro.</p>
+              <p>Programmation en MicroPython de la machine à états gérant le clignement procédural des yeux, les
+                courbes d'accélération du servomoteur et l'horloge Pomodoro.</p>
               <span class="timeline-metric">Livrable : 60 FPS sur bus I2C · 8 émotions vectorielles</span>
             </div>
           </li>
@@ -486,7 +551,8 @@
             </div>
             <div class="timeline-body">
               <h3>Pont WebSocket PC ↔ Desk Bud</h3>
-              <p>Création du script Python compagnon sur ordinateur permettant d'envoyer l'état du CPU, la météo de Dijon et le résultat d'exécution de nos programmes au robot.</p>
+              <p>Création du script Python compagnon sur ordinateur permettant d'envoyer l'état du CPU, la météo de
+                Dijon et le résultat d'exécution de nos programmes au robot.</p>
               <span class="timeline-metric">Livrable : API locale temps réel · Latence &lt; 15 ms</span>
             </div>
           </li>
@@ -498,7 +564,8 @@
             </div>
             <div class="timeline-body">
               <h3>Soutenance finale &amp; Publication Open-Source</h3>
-              <p>Présentation du démonstrateur fonctionnel devant le jury et mise en ligne des fichiers STL, du code source commenté et de la documentation d'assemblage.</p>
+              <p>Présentation du démonstrateur fonctionnel devant le jury et mise en ligne des fichiers STL, du code
+                source commenté et de la documentation d'assemblage.</p>
               <span class="timeline-metric">Livrable : Dépôt GitHub complet · Licence MIT</span>
             </div>
           </li>
@@ -521,22 +588,19 @@
             <article class="module-card reveal">
               <span class="module-num">MODULE 01</span>
               <h3>Gestionnaire Pomodoro &amp; Fatigue</h3>
-              <p>Cycles de 25 minutes de travail profond suivis de 5 minutes de pause, avec rappel postural par mouvement doux de la tête.</p>
+              <p>
+                Cycles de 25 minutes de travail suivis de 5 minutes de pause.
+              </p>
               <code>state.transition("FOCUS", duration=1500)</code>
             </article>
 
             <article class="module-card reveal">
               <span class="module-num">MODULE 02</span>
-              <h3>Sentinelle de Code (IDE Watcher)</h3>
-              <p>Surveille le terminal de l'élève : le Desk Bud sourit quand les tests passent et affiche la ligne d'erreur en cas d'exception Python.</p>
               <code>ws.send(json.dumps({"status": "PASS"}))</code>
             </article>
 
             <article class="module-card reveal">
               <span class="module-num">MODULE 03</span>
-              <h3>Ambiance &amp; Décibels</h3>
-              <p>Échantillonne le niveau sonore ambiant sans jamais enregistrer la voix, pour alerter lorsque le bruit dépasse le seuil de concentration.</p>
-              <code>db_smooth = 0.85 * prev + 0.15 * raw</code>
             </article>
           </div>
 
@@ -569,13 +633,16 @@
     <!-- =========================================================
          SECTION TRANSPARENCE / RESSOURCES (Inspirée des Maths au Sommet)
          ========================================================= -->
-    <section id="soutenir" class="section support-section" data-flavour-section="obsidian" data-status="100% · Prêt pour l'oral">
+    <section id="soutenir" class="section support-section" data-flavour-section="obsidian"
+      data-status="100% · Prêt pour l'oral">
       <div class="container">
         <div class="support-cta-banner reveal">
           <h2>Explorer le projet ou reproduire le Desk Bud.</h2>
-          <p>Tous nos plans 3D, schémas de câblage et scripts Python sont accessibles librement pour les élèves et enseignants de NSI.</p>
+          <p>Tous nos plans 3D, schémas de câblage et scripts Python sont accessibles librement pour les élèves et
+            enseignants de NSI.</p>
           <div class="hero-actions">
-            <a href="https://github.com/Antwhyno/Desk_Bud" target="_blank" rel="noopener" class="btn btn-primary">Explorer le dépôt GitHub →</a>
+            <a href="https://github.com/Antwhyno/Desk_Bud" target="_blank" rel="noopener"
+              class="btn btn-primary">Explorer le dépôt GitHub →</a>
             <a href="mailto:contact@projet-deskbud-nsi.fr" class="btn btn-ghost">✉ Contacter l'équipe</a>
           </div>
         </div>
@@ -584,13 +651,17 @@
           <div class="transparency-block">
             <h3>Transparence &amp; Open-Hardware</h3>
             <p>
-              Le coût total de revient d'un Desk Bud est inférieur à <strong>18,50 €</strong> (ESP32-S3, écran OLED 0,96", micro-servomoteur MG90S, capteur TTP223 et 115 g de filament PLA). Aucune dépendance cloud payante n'est requise : tout fonctionne en local.
+              Le coût total de revient d'un Desk Bud est inférieur à <strong>18,50 €</strong> (ESP32-C3 super mini,
+              écran OLED 1,3", capteur TTP223 et 115 g de filament PLA). Aucune dépendance
+              cloud payante n'est requise : tout fonctionne en local.
             </p>
           </div>
           <div class="transparency-block">
             <h3>Documentation pédagogique NSI</h3>
             <p>
-              Votre lycée ou votre club robotique souhaite fabriquer sa propre flotte de Desk Buds ? Contactez notre équipe pour récupérer le guide de montage pas à pas, les exercices d'algorithmique associés et les profils d'impression 3D.
+              Votre lycée ou votre club robotique souhaite fabriquer sa propre flotte de Desk Buds ? Contactez notre
+              équipe pour récupérer le guide de montage pas à pas, les exercices d'algorithmique associés et les profils
+              d'impression 3D.
             </p>
           </div>
         </div>
@@ -605,7 +676,8 @@
         <strong>Desk Bud — Projet NSI</strong>
         <p class="footer-promo">Promotion 2026–2027</p>
         <p class="footer-desc">
-          Projet pédagogique de spécialité Numérique et Sciences Informatiques (Terminale). Conception matérielle, impression 3D et développement Python embarqué à Dijon.
+          Projet pédagogique de spécialité Numérique et Sciences Informatiques (Terminale). Conception matérielle,
+          impression 3D et développement Python embarqué à Dijon.
         </p>
       </div>
 
@@ -645,4 +717,5 @@
 
   <script type="module" src="js/main.js"></script>
 </body>
+
 </html>
