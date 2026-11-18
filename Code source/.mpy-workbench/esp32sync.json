@@ -1,0 +1,96 @@
+{
+  "version": 1,
+  "syncId": "ff22da14-56a6-49e0-8ebc-6d14a7cde6ea",
+  "root": "/Users/eliottvappereau/Desk_Bud/Code source",
+  "generatedAt": 1795026723755,
+  "files": {
+    "README.md": {
+      "size": 115,
+      "mtime": 1794868412133
+    },
+    "animation.py": {
+      "size": 283,
+      "mtime": 1794868412134
+    },
+    "boot.py": {
+      "size": 139,
+      "mtime": 1794868412134
+    },
+    "boutons.py": {
+      "size": 1038,
+      "mtime": 1794868412134
+    },
+    "config.py": {
+      "size": 555,
+      "mtime": 1794868412134
+    },
+    "dessins.py": {
+      "size": 1952,
+      "mtime": 1794868412134
+    },
+    "icones/Tempo": {
+      "size": 1,
+      "mtime": 1794868412134
+    },
+    "icones/averses.bin": {
+      "size": 128,
+      "mtime": 1794868412135
+    },
+    "icones/brouillard.bin": {
+      "size": 128,
+      "mtime": 1794868412135
+    },
+    "icones/eclaircies.bin": {
+      "size": 128,
+      "mtime": 1794868412135
+    },
+    "icones/neige.bin": {
+      "size": 128,
+      "mtime": 1794868412135
+    },
+    "icones/nuage.bin": {
+      "size": 128,
+      "mtime": 1794868412135
+    },
+    "icones/orage.bin": {
+      "size": 128,
+      "mtime": 1794868412135
+    },
+    "icones/pluie.bin": {
+      "size": 128,
+      "mtime": 1794868412135
+    },
+    "icones/soleil.bin": {
+      "size": 128,
+      "mtime": 1794868412135
+    },
+    "icones/vent.bin": {
+      "size": 128,
+      "mtime": 1794868412135
+    },
+    "main.py": {
+      "size": 1572,
+      "mtime": 1795011779764
+    },
+    "meteo.py": {
+      "size": 1139,
+      "mtime": 1794868412136
+    },
+    "pages.py": {
+      "size": 2494,
+      "mtime": 1795011773920
+    },
+    "sh1106.py": {
+      "size": 10757,
+      "mtime": 1795011782464
+    },
+    "wifi.py": {
+      "size": 605,
+      "mtime": 1794868412136
+    },
+    "yeux.py": {
+      "size": 8018,
+      "mtime": 1795011513371
+    }
+  }
+}

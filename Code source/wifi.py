@@ -1,8 +1,8 @@
 import network
 from time import sleep_ms
 
-SSID = "Nom WIFI"
-MOT_DE_PASSE = "Code WIFI"
+SSID = "Nom du réseau"
+MOT_DE_PASSE = "Mot de passe"
 
 def connexion_wifi():
     wlan = network.WLAN(network.STA_IF)

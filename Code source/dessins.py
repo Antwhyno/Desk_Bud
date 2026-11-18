@@ -1,3 +1,4 @@
+
 # dessins.py - icones 32x32, pixels noirs sur fond blanc
 import framebuf
 
@@ -6,13 +7,22 @@ NOMS_ICONES = (
     "brouillard", "orage", "neige", "vent"
 )
 
-def afficher_icone(oled, nom, x, y):
+
+def afficher_icone(oled, nom, x, y, nuit=False):
     if nom not in NOMS_ICONES:
         nom = "nuage"
     with open("icones/" + nom + ".bin", "rb") as fichier:
         pixels = bytearray(fichier.read())
     image = framebuf.FrameBuffer(pixels, 32, 32, framebuf.MONO_HLSB)
-    oled.blit(image, x, y)
+    if nuit:
+        # palette qui inverse noir et blanc
+        palette = framebuf.FrameBuffer(bytearray(1), 2, 1, framebuf.MONO_HLSB)
+        palette.pixel(0, 0, 1)
+        palette.pixel(1, 0, 0)
+        oled.blit(image, x, y, -1, palette)
+    else:
+        oled.blit(image, x, y)
+
 
 def icone_pour_code(code):
     if code == 0:
@@ -33,11 +43,10 @@ def icone_pour_code(code):
         return "orage"
     return "nuage"
 
-def afficher_meteo(oled, code, x, y):
-    afficher_icone(oled, icone_pour_code(code), x, y)
-    
 
-import framebuf
+def afficher_meteo(oled, code, x, y, nuit=False):
+    afficher_icone(oled, icone_pour_code(code), x, y, nuit)
+
 
 def texte_grand(oled, texte, x, y, taille=2, couleur=0):
     # Transformer le texte en chaine de caracteres
