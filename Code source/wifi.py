@@ -1,7 +1,7 @@
 import network
 from time import sleep_ms
 
-SSID = "Nom du réseau"
+SSID = "SSID"
 MOT_DE_PASSE = "Mot de passe"
 
 def connexion_wifi():

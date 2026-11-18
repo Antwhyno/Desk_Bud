@@ -10,6 +10,7 @@ from sh1106 import SH1106_I2C
 # 400 kHz : affichage ~4x plus rapide. Si l'ecran est instable, mettre 100000.
 i2c = SoftI2C(sda=Pin(OLED_SDA), scl=Pin(OLED_SCL), freq=400000)
 oled = SH1106_I2C(OLED_LARGEUR, OLED_HAUTEUR, i2c, None, OLED_ADRESSE, rotate=180)
+oled.contrast(0)   # 0 = très sombre, 255 = max (défaut : 127)
 
 # ===== Wi-Fi (wifi.py se connecte a l'import) =====
 oled.fill(0)
