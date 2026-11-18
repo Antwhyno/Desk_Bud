@@ -1,40 +1,40 @@
 from machine import Pin, SoftI2C
-from time import sleep_ms, ticks_ms, ticks_diff
+from time import sleep_ms, ticks_ms
 import gc
 import sys
 
 from config import OLED_SDA, OLED_SCL, OLED_ADRESSE, OLED_LARGEUR, OLED_HAUTEUR
 from sh1106 import SH1106_I2C
 
-# ===== 1. ECRAN (d'abord, pour pouvoir afficher des messages) =====
-i2c = SoftI2C(sda=Pin(OLED_SDA), scl=Pin(OLED_SCL), freq=100000)
+# ===== Ecran =====
+# 400 kHz : affichage ~4x plus rapide. Si l'ecran est instable, mettre 100000.
+i2c = SoftI2C(sda=Pin(OLED_SDA), scl=Pin(OLED_SCL), freq=400000)
 oled = SH1106_I2C(OLED_LARGEUR, OLED_HAUTEUR, i2c, None, OLED_ADRESSE, rotate=180)
 
-# ===== 2. WI-FI (wifi.py se connecte quand on l'importe, jusqu'a ~20 s) =====
+# ===== Wi-Fi (wifi.py se connecte a l'import) =====
 oled.fill(0)
 oled.text("Connexion", 28, 20, 1)
 oled.text("Wi-Fi...", 32, 34, 1)
 oled.show()
 import wifi
 
-# ===== 3. LE RESTE =====
-import yeux
+# ===== Boutons, pages, yeux =====
 from boutons import gauche, droite, ok
-from pages import PAGES
+import pages
+import yeux
 
-NB_ECRANS = len(PAGES) + 1      # ecran 0 = les yeux, puis les pages
-ecran = 0
-expression = 0
+yeux.definir_expression("joyeuse")
+
+# ===== Navigation =====
+page_actuelle = 0
+nombre_pages = len(pages.PAGES)
 
 
-def afficher(numero):
+def changer_page(numero):
     gc.collect()
-    if numero == 0:
-        yeux._signature = None  # force le redessin complet du visage
-        return
     try:
-        PAGES[numero - 1](oled)
-    except Exception as e:      # une page en erreur ne doit pas tout arreter
+        pages.afficher(oled, numero)
+    except Exception as e:      # une page en erreur ne bloque pas le reste
         sys.print_exception(e)
         oled.fill(0)
         oled.text("Erreur page", 0, 20, 1)
@@ -42,28 +42,22 @@ def afficher(numero):
         oled.show()
 
 
-yeux.definir_expression("joyeuse")
-afficher(ecran)
-derniere_image = ticks_ms()
+changer_page(page_actuelle)
 
 while True:
     t = ticks_ms()
 
     if droite.appui():
-        ecran = (ecran + 1) % NB_ECRANS
-        afficher(ecran)
+        page_actuelle = (page_actuelle + 1) % nombre_pages
+        changer_page(page_actuelle)
 
     if gauche.appui():
-        ecran = (ecran - 1) % NB_ECRANS
-        afficher(ecran)
+        page_actuelle = (page_actuelle - 1) % nombre_pages
+        changer_page(page_actuelle)
 
-    if ok.appui() and ecran == 0:
-        expression = (expression + 1) % len(yeux.ORDRE_EXPRESSIONS)
-        yeux.definir_expression(yeux.ORDRE_EXPRESSIONS[expression])
+    if ok.appui():
+        pages.bouton_ok(oled, page_actuelle)
 
-    # Animation des yeux (~30 ms entre deux images), seulement sur l'ecran 0
-    if ecran == 0 and ticks_diff(t, derniere_image) >= 30:
-        yeux.mettre_a_jour(oled, t)
-        derniere_image = t
+    pages.rafraichir(oled, page_actuelle, t)
 
     sleep_ms(5)

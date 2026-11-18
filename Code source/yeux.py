@@ -1,12 +1,12 @@
-"""Animation autonome des yeux et des expressions de Desk Bud.
+"""Logique des yeux et des expressions de Desk Bud.
 
-Utilisation dans le programme principal :
-    import yeux
-    yeux.mettre_a_jour(oled, t)
+Ce module ne touche pas a l'ecran : il calcule l'image et la dessine
+dans le framebuffer qu'on lui donne. L'affichage (show) est fait par pages.py.
+
+    yeux.mettre_a_jour(t)   -> True si l'image a change
+    yeux.dessiner(oled)     -> dessine le visage (sans show)
     yeux.definir_expression("joyeuse")
-
-L'ecran OLED doit faire 128 x 64 pixels. Cette fonction ne bloque pas
-le programme : appeler mettre_a_jour a chaque tour de la boucle.
+    yeux.expression_suivante()
 """
 import math
 import random
@@ -32,7 +32,7 @@ _expression = "neutre"
 _cible = list(EXPRESSIONS[_expression])
 _valeurs = [float(v) for v in _cible]
 _prochaine_humeur = time.ticks_add(time.ticks_ms(), 20000)
-_prochaine_blink = time.ticks_add(time.ticks_ms(), 2500)
+_prochaine_blink = time.ticks_add(time.ticks_ms(), 3000)
 _blink = 1.0
 _blink_seq = None
 _blink_index = 0
@@ -44,6 +44,7 @@ _cible_y = 0.0
 _mouvement_debut = 0
 _mouvement_duree = 1
 _signature = None
+_image = None   # derniere image calculee (parametres de dessin)
 
 
 def definir_expression(nom):
@@ -55,6 +56,12 @@ def definir_expression(nom):
     _expression = nom
     _cible = list(EXPRESSIONS[nom])
     return True
+
+
+def expression_suivante():
+    """Passe a l'expression suivante de la liste."""
+    i = ORDRE_EXPRESSIONS.index(_expression)
+    definir_expression(ORDRE_EXPRESSIONS[(i + 1) % len(ORDRE_EXPRESSIONS)])
 
 
 def _arrondir(valeur):
@@ -127,7 +134,8 @@ def _animer_regard(t):
 
     if ecoule >= _mouvement_duree:
         _regard_x, _regard_y = _cible_x, _cible_y
-        _mouvement_debut = time.ticks_add(t, random.randint(350, 1400))
+        # Pause entre deux mouvements du regard (plus longue = plus calme)
+        _mouvement_debut = time.ticks_add(t, random.randint(1500, 5000))
         _mouvement_duree = 0
     else:
         p = max(0.0, ecoule / _mouvement_duree)
@@ -145,7 +153,8 @@ def _animer_clignement(t):
             if _blink_index >= len(_blink_seq):
                 _blink_seq = None
                 _blink = 1.0
-                _prochaine_blink = time.ticks_add(t, random.randint(1800, 4500))
+                # Delai entre deux clignements
+                _prochaine_blink = time.ticks_add(t, random.randint(3000, 8000))
             else:
                 _blink = _blink_seq[_blink_index]
     elif time.ticks_diff(t, _prochaine_blink) >= 0:
@@ -155,9 +164,14 @@ def _animer_clignement(t):
         _blink = _blink_seq[0]
 
 
-def _dessiner(d, t):
-    global _signature
+def _preparer(t):
+    """Calcule l'image. Renvoie True si elle a change depuis la derniere fois."""
+    global _signature, _image
     largeur, hauteur, haut, bas, bouche_l, courbe, ouverture = _valeurs
+    # Valeurs arrondies : sinon l'image semble "changer" a chaque tour
+    largeur = _arrondir(largeur)
+    bouche_l = _arrondir(bouche_l)
+    ouverture = _arrondir(ouverture)
     dx = _arrondir(_regard_x * 7)
     dy = _arrondir(_regard_y * 3)
     if _expression == "endormie":
@@ -170,8 +184,19 @@ def _dessiner(d, t):
     sig = (largeur, hauteur_oeil, _arrondir(haut), _arrondir(bas * _blink),
            _expression, dx, dy, _arrondir(courbe), bouche_l, ouverture)
     if sig == _signature:
-        return
+        return False
     _signature = sig
+    _image = (gauche, droite, centres_y, largeur, hauteur_oeil, haut,
+              bas, bouche_l, courbe, ouverture, dx, dy)
+    return True
+
+
+def dessiner(d):
+    """Dessine le visage dans le framebuffer de d (sans appeler show)."""
+    if _image is None:
+        return
+    (gauche, droite, centres_y, largeur, hauteur_oeil, haut,
+     bas, bouche_l, courbe, ouverture, dx, dy) = _image
     d.fill(0)
     _oeil(d, gauche, centres_y, largeur, hauteur_oeil, haut)
     _oeil(d, droite, centres_y, largeur, hauteur_oeil, haut)
@@ -179,12 +204,11 @@ def _dessiner(d, t):
         _disque(d, gauche, centres_y + hauteur_oeil // 2 + 13, 23, 0)
         _disque(d, droite, centres_y + hauteur_oeil // 2 + 13, 23, 0)
     _bouche(d, 64 + dx // 2, 57 + dy // 2, bouche_l, courbe, ouverture)
-    d.show()
 
 
-def mettre_a_jour(d, t=None):
-    """Fait avancer l'animation et affiche le visage sur l'ecran OLED.
-    Appeler cette fonction en boucle, environ toutes les 30 millisecondes."""
+def mettre_a_jour(t=None):
+    """Fait avancer l'animation. Renvoie True si l'image a change
+    (il faut alors appeler dessiner puis oled.show)."""
     global _prochaine_humeur
     if t is None:
         t = time.ticks_ms()
@@ -192,7 +216,7 @@ def mettre_a_jour(d, t=None):
         _valeurs[i] += (_cible[i] - _valeurs[i]) * 0.2
     _animer_regard(t)
     _animer_clignement(t)
-    # Petites expressions spontanées lorsque l'expression est neutre.
+    # Petites expressions spontanees lorsque l'expression est neutre.
     if _expression == "neutre" and time.ticks_diff(t, _prochaine_humeur) >= 0:
         nom = "joyeuse" if random.random() < 0.6 else "curieuse"
         definir_expression(nom)
@@ -200,4 +224,4 @@ def mettre_a_jour(d, t=None):
     elif _expression != "neutre" and time.ticks_diff(t, _prochaine_humeur) >= 0:
         definir_expression("neutre")
         _prochaine_humeur = time.ticks_add(t, random.randint(15000, 45000))
-    _dessiner(d, t)
+    return _preparer(t)
